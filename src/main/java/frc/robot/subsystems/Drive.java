@@ -19,6 +19,8 @@ import frc.robot.commands.ArcadeDrive;
  * Add your docs here.
  */
 public class Drive extends Subsystem {
+
+  public static final double TICKS_PER_INCH = 25.6;
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   final public WPI_TalonSRX
@@ -86,6 +88,22 @@ public class Drive extends Subsystem {
     rightMaster.set(scale * (forward + rotate));
     leftMaster.set(scale * (forward - rotate));
   }
+
+  public double getLeftPosition() {
+    return leftMaster.getSelectedSensorPosition();
+  }
+
+  public double getRightPosition() {
+    return rightMaster.getSelectedSensorPosition();
+  }
+
+  public void resetEncoders() {
+    rightMaster.setSelectedSensorPosition(0, 0, 10);
+    leftMaster.setSelectedSensorPosition(0, 0, 10);
+  }
+
+
+
 }
 
 

@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class ArcadeDrive extends Command {
@@ -27,11 +28,13 @@ public class ArcadeDrive extends Command {
   protected void execute() {
     double stickY = - Robot.m_oi.getStick().getY();
     double stickTwist = - Robot.m_oi.getStick().getTwist();
+    
+    //Used to determine signs when using exponents
     double ySign = (stickY > 0) ? 1.0 : -1.0;
     double twistSign = (stickTwist > 0) ? 1.0 : -1.0;
 
-    double powerForward = Math.pow(Math.abs(stickY), 2) * ySign;
-    double powerTwist = Math.pow(Math.abs(stickTwist), 2) * twistSign;
+    double powerForward = Math.pow(Math.abs(stickY), Constants.SENSITIVITY) * ySign;
+    double powerTwist = Math.pow(Math.abs(stickTwist), Constants.SENSITIVITY) * twistSign;
 
 
     Robot.m_drive.setArcadePower(powerForward, powerTwist);

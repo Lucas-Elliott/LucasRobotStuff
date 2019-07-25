@@ -9,7 +9,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.TimedDrive;
+import frc.robot.commands.DistanceDrive;
+//import frc.robot.commands.TimedDrive;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -27,8 +28,8 @@ public class OI {
 
   public OI() {
 
-    button12.whenPressed(new TimedDrive(1, 0.5));
-
+    //button12.whenPressed(new TimedDrive(1, 0.5));
+    button12.whenPressed(new DistanceDrive(30, 0.5));
   }
 
 
