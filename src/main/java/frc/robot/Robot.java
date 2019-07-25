@@ -28,6 +28,12 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
+  //Displays Data about the robot on the Dashboard
+  void displayDriveParameters() {
+    SmartDashboard.putString("DB/String 0", String.format("Right Encoder : %4.3f", Robot.m_drive.getRightPosition()));
+    SmartDashboard.putString("DB/String 1", String.format("Left Encoder : %4.3f", Robot.m_drive.getLeftPosition()));
+  }
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
