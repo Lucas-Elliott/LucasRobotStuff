@@ -27,8 +27,14 @@ public class ArcadeDrive extends Command {
   protected void execute() {
     double stickY = - Robot.m_oi.getStick().getY();
     double stickTwist = - Robot.m_oi.getStick().getTwist();
+    double ySign = (stickY > 0) ? 1.0 : -1.0;
+    double twistSign = (stickTwist > 0) ? 1.0 : -1.0;
 
-    Robot.m_drive.setArcadePower(stickY, stickTwist);
+    double powerForward = Math.pow(Math.abs(stickY), 2) * ySign;
+    double powerTwist = Math.pow(Math.abs(stickTwist), 2) * twistSign;
+
+
+    Robot.m_drive.setArcadePower(powerForward, powerTwist);
   }
 
   // Make this return true when this Command no longer needs to run execute()
