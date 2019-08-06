@@ -82,7 +82,6 @@ public class Drive extends Subsystem {
     leftMaster.set(leftPower);
   }
   
-
   public void setArcadePower(double forward, double rotate) {
     double max = Math.abs(forward) + Math.abs(rotate);
     double scale = (max <= 1.0) ? 1.0 : (1.0 / max);

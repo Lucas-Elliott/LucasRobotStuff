@@ -32,6 +32,7 @@ public class Robot extends TimedRobot {
   void displayDriveParameters() {
     SmartDashboard.putString("DB/String 0", String.format("Right Encoder : %4.3f", Robot.m_drive.getRightPosition()));
     SmartDashboard.putString("DB/String 1", String.format("Left Encoder : %4.3f", Robot.m_drive.getLeftPosition()));
+    SmartDashboard.putString("DB/String 2", String.format("Turn Sensitivity : %4.3f", Constants.TURNGAIN));
   }
 
   /**

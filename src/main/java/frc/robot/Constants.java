@@ -12,6 +12,8 @@ package frc.robot;
  */
 public class Constants {
     public static double SENSITIVITY = 2.0;
-
+    
+    //Sensitivity of Turn
+    public static double TURNGAIN = .7;
 
 }

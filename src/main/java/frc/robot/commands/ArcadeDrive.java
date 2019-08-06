@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
+
 public class ArcadeDrive extends Command {
   public ArcadeDrive() {
     requires(Robot.m_drive);
@@ -34,8 +35,8 @@ public class ArcadeDrive extends Command {
     double twistSign = (stickTwist > 0) ? 1.0 : -1.0;
 
     double powerForward = Math.pow(Math.abs(stickY), Constants.SENSITIVITY) * ySign;
-    double powerTwist = Math.pow(Math.abs(stickTwist), Constants.SENSITIVITY) * twistSign;
-
+    double powerTwist = (Math.pow(Math.abs(stickTwist), Constants.SENSITIVITY) * twistSign) * Constants.TURNGAIN;
+    
 
     Robot.m_drive.setArcadePower(powerForward, powerTwist);
   }
