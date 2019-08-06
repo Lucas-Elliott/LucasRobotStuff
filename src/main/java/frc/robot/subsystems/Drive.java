@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.commands.ArcadeDrive;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 /**
  * Add your docs here.
@@ -88,6 +89,14 @@ public class Drive extends Subsystem {
     rightMaster.set(scale * (forward + rotate));
     leftMaster.set(scale * (forward - rotate));
   }
+
+  public void setArcadeSpeed(double forward, double rotate) {
+    double max = Math.abs(forward) + Math.abs(rotate);
+    double scale = (max <= 1.0) ? 1.0 : (1.0 / max);
+    rightMaster.set(ControlMode.Velocity, scale * (forward + rotate));
+    leftMaster.set(ControlMode.Velocity, scale * (forward - rotate));
+  }
+
 
   public double getLeftPosition() {
     return leftMaster.getSelectedSensorPosition();

@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.AdjustSensitivity;
 import frc.robot.commands.DistanceDrive;
 //import frc.robot.commands.TimedDrive;
 
@@ -21,6 +22,8 @@ public class OI {
   private final Joystick stick = new Joystick(0);
 
   private final JoystickButton button12 = new JoystickButton(stick, 12);
+  private final JoystickButton button7 = new JoystickButton(stick, 7);
+  private final JoystickButton button8 = new JoystickButton(stick, 8);
 
   public Joystick getStick() {
     return stick;
@@ -30,6 +33,8 @@ public class OI {
 
     //button12.whenPressed(new TimedDrive(1, 0.5));
     button12.whenPressed(new DistanceDrive(30, 0.5));
+    button7.whenPressed(new AdjustSensitivity(.1));
+    button8.whenPressed(new AdjustSensitivity(-.1));
   }
 
 
