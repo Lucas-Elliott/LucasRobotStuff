@@ -8,12 +8,17 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
+
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.SpeedDrive;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 /**
@@ -31,6 +36,9 @@ public class Drive extends Subsystem {
   leftMaster = new WPI_TalonSRX(RobotMap.leftMaster),
   leftSlave2 = new WPI_TalonSRX(RobotMap.leftSlave2),
   leftSlave3 = new WPI_TalonSRX(RobotMap.leftSlave3);
+
+  private double rightTargetVelocity = 0;
+  private double leftTargetVelocity = 0; 
 
   public Drive() {
     super();
@@ -53,14 +61,29 @@ public class Drive extends Subsystem {
     leftSlave3.setInverted(InvertType.FollowMaster);
     setNeutralMode(NeutralMode.Brake);
     rightMaster.setInverted(InvertType.InvertMotorOutput);
-    rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    configMaster(rightMaster);
+    configMaster(leftMaster);
+    
+    
+  
+  }
+
+  private void configMaster(TalonSRX master){
+  master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+  configPID(master);
+  }
+
+  private void configPID(TalonSRX master){
+  master.config_kF(0, Constants.KF);
+  master.config_kP(0, Constants.KP);
+  master.config_kI(0, Constants.KI);
   }
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ArcadeDrive());
+    setDefaultCommand(new SpeedDrive());
   }
+
 
   public void setNeutralMode(NeutralMode mode) {
  //method to easily set the neutral mode of all of the driveTrain motors
@@ -92,9 +115,16 @@ public class Drive extends Subsystem {
   public void setArcadeSpeed(double forward, double rotate) {
     double max = Math.abs(forward) + Math.abs(rotate);
     double scale = (max <= 1.0) ? 1.0 : (1.0 / max);
-    rightMaster.set(ControlMode.Velocity, scale * (forward + rotate));
-    leftMaster.set(ControlMode.Velocity, scale * (forward - rotate));
+    configPID(rightMaster);
+    configPID(leftMaster);
+    rightTargetVelocity = scale * (forward + rotate) * Constants.MAX_VELOCITY;
+    leftTargetVelocity = scale * (forward - rotate) * Constants.MAX_VELOCITY;
+    
+    rightMaster.set(ControlMode.Velocity, rightTargetVelocity);
+    leftMaster.set(ControlMode.Velocity, leftTargetVelocity);
+   
   }
+
 
 
   public double getLeftPosition() {
@@ -103,6 +133,22 @@ public class Drive extends Subsystem {
 
   public double getRightPosition() {
     return rightMaster.getSelectedSensorPosition();
+  }
+
+  public double getRightVelocity() {
+    return rightMaster.getSelectedSensorVelocity();
+  }
+
+  public double getLeftVelocity() {
+    return leftMaster.getSelectedSensorVelocity();
+  }
+
+  public double getRightTargetVelocity() {
+    return rightTargetVelocity;
+  }
+
+  public double getLeftTargetVelocity() {
+    return leftTargetVelocity;
   }
 
   public void resetEncoders() {

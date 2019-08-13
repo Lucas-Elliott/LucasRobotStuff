@@ -5,22 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.robot.commands;
 
-/**
- * Add your docs here.
- */
-public class Constants {
-    public static double SENSITIVITY = 2.0;
-    
-    //Sensitivity of Turn
-    public static double TURNGAIN = .7;
+import frc.robot.Constants;
 
-    public static double KP = 1.5;
+public class AdjustKP extends BaseAdjust {
+  
+  public AdjustKP(double deltaKP) {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    super(deltaKP);
+  }
 
-    public static double KI = 0;
 
-    public static double KF = 4.4;
-
-    public static double MAX_VELOCITY = 230;
+  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  protected boolean isFinished() {
+    Constants.KP += delta;
+    return true;
+  }
 }

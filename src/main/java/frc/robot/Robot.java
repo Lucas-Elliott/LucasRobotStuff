@@ -31,8 +31,14 @@ public class Robot extends TimedRobot {
   //Displays Data about the robot on the Dashboard
   void displayDriveParameters() {
     SmartDashboard.putString("DB/String 0", String.format("Right Encoder : %4.3f", Robot.m_drive.getRightPosition()));
-    SmartDashboard.putString("DB/String 1", String.format("Left Encoder : %4.3f", Robot.m_drive.getLeftPosition()));
-    SmartDashboard.putString("DB/String 2", String.format("Turn Sensitivity : %4.3f", Constants.TURNGAIN));
+    SmartDashboard.putString("DB/String 5", String.format("Left Encoder : %4.3f", Robot.m_drive.getLeftPosition()));
+    SmartDashboard.putString("DB/String 6", String.format("KF : %4.3f", Constants.KF));
+    SmartDashboard.putString("DB/String 1", String.format("KP : %4.3f", Constants.KP));
+    SmartDashboard.putString("DB/String 2", String.format("KI : %4.3f", Constants.KI));
+    SmartDashboard.putString("DB/String 3", String.format("TargetRightV: %4.3f", Robot.m_drive.getRightTargetVelocity()));
+    SmartDashboard.putString("DB/String 8", String.format("RightVelocity : %4.3f", Robot.m_drive.getRightVelocity()));
+    SmartDashboard.putString("DB/String 4", String.format("TargetLeftV: %4.3f", Robot.m_drive.getLeftTargetVelocity()));
+    SmartDashboard.putString("DB/String 9", String.format("LeftVelocity : %4.3f", Robot.m_drive.getLeftVelocity()));
   }
 
   /**
@@ -71,6 +77,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+    displayDriveParameters();
     Scheduler.getInstance().run();
   }
 
@@ -126,6 +133,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    displayDriveParameters();
     Scheduler.getInstance().run();
   }
 

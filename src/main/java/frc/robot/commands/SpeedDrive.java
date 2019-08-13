@@ -37,7 +37,7 @@ public class SpeedDrive extends Command {
     double powerTwist = Math.pow(Math.abs(stickTwist), Constants.SENSITIVITY) * twistSign;
 
 
-    Robot.m_drive.setArcadePower(powerForward, powerTwist);
+    Robot.m_drive.setArcadeSpeed(powerForward, powerTwist);
   }
 
   // Make this return true when this Command no longer needs to run execute()

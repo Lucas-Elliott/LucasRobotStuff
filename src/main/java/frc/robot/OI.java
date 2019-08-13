@@ -9,10 +9,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.AdjustSensitivity;
+import frc.robot.commands.AdjustKP;
+import frc.robot.commands.AdjustKI;
+import frc.robot.commands.AdjustKF;
 import frc.robot.commands.DistanceDrive;
-import frc.robot.commands.AdjustTurnSensitivity;
+//import frc.robot.commands.AdjustTurnSensitivity;
 //import frc.robot.commands.TimedDrive;
+//import frc.robot.commands.AdjustSensitivity;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -23,11 +26,13 @@ public class OI {
   private final Joystick stick = new Joystick(0);
 
   private final JoystickButton button12 = new JoystickButton(stick, 12);
-  private final JoystickButton button7 = new JoystickButton(stick, 7);
   private final JoystickButton button8 = new JoystickButton(stick, 8);
   private final JoystickButton button9 = new JoystickButton (stick, 9);
   private final JoystickButton button10 = new JoystickButton (stick, 10);
-  
+  private final JoystickButton button6 = new JoystickButton (stick, 6);
+  private final JoystickButton button7 = new JoystickButton (stick, 7);
+  private final JoystickButton button11 = new JoystickButton (stick, 11);
+
   public Joystick getStick() {
     return stick;
   }
@@ -36,12 +41,18 @@ public class OI {
 
     //button12.whenPressed(new TimedDrive(1, 0.5));
     button12.whenPressed(new DistanceDrive(30, 0.5));
-    button7.whenPressed(new AdjustSensitivity(.1));
-    button8.whenPressed(new AdjustSensitivity(-.1));
-    button9.whenPressed(new AdjustTurnSensitivity (.1));
-    button10.whenPressed(new AdjustTurnSensitivity(-.1));
-    
+    //button7.whenPressed(new AdjustSensitivity(.1));
+    //button8.whenPressed(new AdjustSensitivity(-.1));
+    //button9.whenPressed(new AdjustTurnSensitivity (.1));
+    //button10.whenPressed(new AdjustTurnSensitivity(-.1));
+    button6.whenPressed(new AdjustKP(.1));
+    button7.whenPressed(new AdjustKP(-.1));
+    button8.whenPressed(new AdjustKI(.0005));
+    button9.whenPressed(new AdjustKI(-.0005));
+    button10.whenPressed(new AdjustKF(.1));
+    button11.whenPressed(new AdjustKF(-.1));
   }
+
 
 
 
