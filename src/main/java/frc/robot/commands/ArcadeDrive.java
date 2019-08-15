@@ -34,8 +34,8 @@ public class ArcadeDrive extends Command {
     double ySign = (stickY > 0) ? 1.0 : -1.0;
     double twistSign = (stickTwist > 0) ? 1.0 : -1.0;
 
-    double powerForward = Math.pow(Math.abs(stickY), Constants.SENSITIVITY) * ySign;
-    double powerTwist = (Math.pow(Math.abs(stickTwist), Constants.SENSITIVITY) * twistSign) * Constants.TURNGAIN;
+    double powerForward = Math.pow(Math.abs(stickY), Constants.FORWARD_SENSITIVITY) * ySign;
+    double powerTwist = (Math.pow(Math.abs(stickTwist), Constants.TURN_SENSITIVITY) * twistSign) * Constants.TURNGAIN;
     
 
     Robot.m_drive.setArcadePower(powerForward, powerTwist);

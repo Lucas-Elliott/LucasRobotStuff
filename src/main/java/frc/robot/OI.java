@@ -41,8 +41,8 @@ public class OI {
 
     //button12.whenPressed(new TimedDrive(1, 0.5));
     button12.whenPressed(new DistanceDrive(30, 0.5));
-    //button7.whenPressed(new AdjustSensitivity(.1));
-    //button8.whenPressed(new AdjustSensitivity(-.1));
+    //button7.whenPressed(new AdjustForwardSensitivity(.1));
+    //button8.whenPressed(new AdjustForwardSensitivity(-.1));
     //button9.whenPressed(new AdjustTurnSensitivity (.1));
     //button10.whenPressed(new AdjustTurnSensitivity(-.1));
     button6.whenPressed(new AdjustKP(.1));

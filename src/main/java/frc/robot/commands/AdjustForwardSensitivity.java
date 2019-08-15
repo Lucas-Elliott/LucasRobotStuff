@@ -8,10 +8,10 @@
 package frc.robot.commands;
 import frc.robot.Constants;
 
-public class AdjustSensitivity extends BaseAdjust {
+public class AdjustForwardSensitivity extends BaseAdjust {
  
 
-  public AdjustSensitivity(double SensChange) {
+  public AdjustForwardSensitivity(double SensChange) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     super(SensChange);
@@ -21,7 +21,7 @@ public class AdjustSensitivity extends BaseAdjust {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    Constants.SENSITIVITY += delta;
+    Constants.FORWARD_SENSITIVITY += delta;
     return true;
   }
 

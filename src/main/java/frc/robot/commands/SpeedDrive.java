@@ -33,9 +33,15 @@ public class SpeedDrive extends Command {
     double ySign = (stickY > 0) ? 1.0 : -1.0;
     double twistSign = (stickTwist > 0) ? 1.0 : -1.0;
 
-    double powerForward = Math.pow(Math.abs(stickY), Constants.SENSITIVITY) * ySign;
-    double powerTwist = Math.pow(Math.abs(stickTwist), Constants.SENSITIVITY) * twistSign;
+    double useY = (Math.abs(stickY) < Constants.DEADBAND) ? 0.0 :
+      (Math.abs(stickY) - Constants.DEADBAND) / (1.0 - Constants.DEADBAND);
+    double useTwist = (Math.abs(stickTwist) < Constants.DEADBAND) ? 0.0 :
+      (Math.abs(stickTwist) - Constants.DEADBAND) / (1.0 - Constants.DEADBAND);
 
+    double powerForward = Math.pow(useY, Constants.FORWARD_SENSITIVITY) * ySign;
+    double powerTwist = Math.pow(useTwist, Constants.TURN_SENSITIVITY) * twistSign;
+
+    
 
     Robot.m_drive.setArcadeSpeed(powerForward, powerTwist);
   }

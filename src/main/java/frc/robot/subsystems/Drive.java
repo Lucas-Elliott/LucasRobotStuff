@@ -16,7 +16,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import frc.robot.commands.ArcadeDrive;
+//import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.SpeedDrive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -104,7 +104,7 @@ public class Drive extends Subsystem {
     rightMaster.set(rightPower);
     leftMaster.set(leftPower);
   }
-  
+
   public void setArcadePower(double forward, double rotate) {
     double max = Math.abs(forward) + Math.abs(rotate);
     double scale = (max <= 1.0) ? 1.0 : (1.0 / max);
@@ -156,6 +156,10 @@ public class Drive extends Subsystem {
     leftMaster.setSelectedSensorPosition(0, 0, 10);
   }
 
+  public void resetIntegral() {
+    rightMaster.setIntegralAccumulator(0);
+    leftMaster.setIntegralAccumulator(0);
+  }
 
 
 }

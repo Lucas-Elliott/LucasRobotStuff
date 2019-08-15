@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class AdjustKI extends BaseAdjust {
   
@@ -22,6 +23,7 @@ public class AdjustKI extends BaseAdjust {
   @Override
   protected boolean isFinished() {
     Constants.KI += delta;
+    Robot.m_drive.resetIntegral();
     return true;
   }
 

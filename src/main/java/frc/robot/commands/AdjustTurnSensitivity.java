@@ -7,23 +7,19 @@
 
 package frc.robot.commands;
 
+
 import frc.robot.Constants;
 
 public class AdjustTurnSensitivity extends BaseAdjust {
-  public AdjustTurnSensitivity(double deltaTurnSensitivity) {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    super(deltaTurnSensitivity);
+  public AdjustTurnSensitivity(double TSensChange) {
+   super(TSensChange);
   }
-
- 
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    Constants.TURNGAIN += delta;
-    return false;
+    Constants.TURN_SENSITIVITY += delta;
+    return true;
   }
 
-  
 }
